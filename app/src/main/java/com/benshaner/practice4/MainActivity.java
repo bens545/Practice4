@@ -7,10 +7,13 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.benshaner.practice4.Fragments.FragmentAdd;
 import com.benshaner.practice4.Fragments.FragmentHome;
+import com.benshaner.practice4.Fragments.FragmentList;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -60,8 +63,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentHome()).commit();
                 break;
             case R.id.nav_add:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentAdd()).commit();
                 break;
             case R.id.nav_view:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentList()).commit();
                 break;
             case R.id.nav_sign_out:
                 FirebaseAuth.getInstance().signOut();
@@ -74,15 +79,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.nav_drawer_items, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public void onConfigurationChanged(@NonNull Configuration newConfig) {
-//        super.onConfigurationChanged(newConfig);
-//        mActionBarDrawerToggle.onConfigurationChanged(newConfig);
-//    }
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mActionBarDrawerToggle.onConfigurationChanged(newConfig);
+    }
 }
