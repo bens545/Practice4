@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mDrawerLayout = findViewById(R.id.nav_drawer_layout);
         mNavigationView = findViewById(R.id.nav_view);
 
+        // Setup the navigation drawer
         mNavigationView.setNavigationItemSelectedListener(this);
 
         mActionBarDrawerToggle = new ActionBarDrawerToggle(
@@ -43,6 +44,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mDrawerLayout.addDrawerListener(mActionBarDrawerToggle);
         mActionBarDrawerToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        // Load to home fragment
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentHome()).commit();
     }
 
@@ -58,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
+        // Handle clicks on navigation items to change fragments
         switch (id) {
             case R.id.nav_home:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentHome()).commit();
@@ -75,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
         }
 
+        // Close the drawer after selecting an item
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }

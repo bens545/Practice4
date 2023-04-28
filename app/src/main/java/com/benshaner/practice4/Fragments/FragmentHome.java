@@ -22,8 +22,11 @@ public class FragmentHome extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // Setup fragment
         View rootView =  inflater.inflate(R.layout.fragment_home, container, false);
+        // Get users email
         String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        //Display users email in textView
         mUserNameTextView = rootView.findViewById(R.id.user_name_text);
         mUserNameTextView.setText(email);
         return rootView;

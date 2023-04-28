@@ -33,10 +33,12 @@ public class FragmentList extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // Setup recycler view
         View rootView = inflater.inflate(R.layout.fragment_list, container, false);
         mRecyclerView = rootView.findViewById(R.id.recyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        // Load countries from database
         firebaseDatabase = FirebaseDatabase.getInstance().getReference("countries");
         firebaseDatabase.addValueEventListener(new ValueEventListener() {
             @Override
@@ -46,6 +48,7 @@ public class FragmentList extends Fragment {
                     Country country = dataSnapshot.getValue(Country.class);
                     countryList.add(country);
                 }
+                // Setup the country adapter
                 mCountryAdapter = new CountryAdapter(countryList);
                 mRecyclerView.setAdapter(mCountryAdapter);
             }

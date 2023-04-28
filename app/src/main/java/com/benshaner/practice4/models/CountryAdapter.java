@@ -39,9 +39,11 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.CountryV
     public void onBindViewHolder(@NonNull CountryViewHolder holder, int position) {
         Country country = mCountries.get(position);
         holder.bind(country);
+        // Add listener for delete button clicks
         holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Delete country from database when delete btn is clicked
                 Log.d("Delete: ", country.getCode());
                 firebaseDatabase.getReference("countries").child(country.getCode()).removeValue();
             }
@@ -53,6 +55,10 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.CountryV
         return mCountries.size();
     }
 
+    /**
+     * Update the country list and recycler view
+     * @param countries List of Countries to display
+     */
     public void setCountries(List<Country> countries) {
         mCountries = countries;
         notifyDataSetChanged();
@@ -66,6 +72,7 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.CountryV
 
         public CountryViewHolder(@NonNull View itemView) {
             super(itemView);
+            // Find all text views and buttons
             mCodeTextView = itemView.findViewById(R.id.code);
             mNameTextView = itemView.findViewById(R.id.name);
             mContinentTextView = itemView.findViewById(R.id.continent);
@@ -73,6 +80,7 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.CountryV
         }
 
         public void bind(Country country) {
+            // Set text view texts
             mCodeTextView.setText("Code: " + country.getCode());
             mNameTextView.setText("Name: " + country.getName());
             mContinentTextView.setText("Continent: " + country.getContinent());

@@ -19,6 +19,7 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_screen);
 
+        // Show loading animation
         mProgressBar = findViewById(R.id.splash_progress_bar);
         ObjectAnimator animator = ObjectAnimator.ofInt(mProgressBar, "progress", 0, 100);
         animator.setDuration(5000);
@@ -28,10 +29,11 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                //  Create intent to change activities once loading is done
                 Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
             }
-        }, 5000);
+        }, 5000); // This time should match animator.setDuration
     }
 }

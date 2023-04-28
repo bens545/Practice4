@@ -4,8 +4,19 @@ import java.io.Serializable;
 
 public class Country implements Serializable {
 
+    /**
+     * 3 Letter country code
+     */
     private String code;
+
+    /**
+     * The country name
+     */
     private String name;
+
+    /**
+     * The continent the country is on
+     */
     private String continent;
 
     public Country() {

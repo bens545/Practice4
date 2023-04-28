@@ -31,11 +31,13 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_add, container, false);
 
+        // Find Edit Texts and buttons
         mEditTextCode = rootView.findViewById(R.id.code);
         mEditTextName = rootView.findViewById(R.id.name);
         mEditTextContinent = rootView.findViewById(R.id.continent);
         mSaveButton = rootView.findViewById(R.id.save_button);
 
+        // Setup button listeners
         mSaveButton.setOnClickListener(this);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -45,24 +47,30 @@ public class FragmentAdd extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
+        // Gather text from inputs
         String code = mEditTextCode.getText().toString();
         String name = mEditTextName.getText().toString();
         String continent = mEditTextContinent.getText().toString();
 
+        // Verify Country code is provided
         if (TextUtils.isEmpty(code)) {
             mEditTextCode.setError("Country code is required");
             return;
         }
 
+        // Verify Country name is provided
         if (TextUtils.isEmpty(name)) {
             mEditTextName.setError("Country name is required");
             return;
         }
 
+        // Create a new country and save to the database
+        // Once saved it will automatically display on the recycler view
         Country country = new Country(code, name, continent);
         firebaseDatabase.getReference("countries").child(code).setValue(country);
         Toast.makeText(getActivity(), "Save Successful!", Toast.LENGTH_SHORT).show();
 
+        // Clear inputs
         mEditTextCode.setText("");
         mEditTextName.setText("");
         mEditTextContinent.setText("");
